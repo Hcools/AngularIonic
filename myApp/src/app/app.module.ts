@@ -6,7 +6,11 @@ import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+
 import { CategoriesComponent } from '../pages/categories/categories';
+import { NotesComponent } from '../pages/notes/notes';
+import { AddCategoryComponent } from '../pages/addcategory/addcategory';
+import { AddNoteComponent } from '../pages/addnote/addnote';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -16,7 +20,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     HomePage,
     ListPage,
-    CategoriesComponent
+    CategoriesComponent,
+    NotesComponent,
+    AddCategoryComponent,
+    AddNoteComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +34,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    CategoriesComponent,
+    NotesComponent,
+    AddCategoryComponent,
+    AddNoteComponent
   ],
   providers: [
     StatusBar,

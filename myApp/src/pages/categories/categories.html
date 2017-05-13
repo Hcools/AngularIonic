@@ -1,0 +1,63 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>
+          <h1>{{ title }}</h1>
+      </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item ion-item *ngFor="let category of categories; let i = index;">
+        {{ category.name }}
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+
+<!--
+<div class="container">
+  <div class="page-header">
+    <h1>{{ title }}</h1>
+  </div>
+
+  <table class="table table-striped">
+    <tr *ngFor="let category of categories; let i = index;">
+      <td>
+        <span *ngIf="categoryEdited != i">
+          {{ category.name }}
+        </span>
+        <input id="title"
+               type="text"
+               class="form-control"
+
+               *ngIf="categoryEdited == i"
+               [(ngModel)]="category.name" #ctrl="ngModel" required/>
+        </td>
+        <td class="text-right">
+          <button class="btn btn-sm btn-info"
+                  (click)="updateCategory(category, i)"
+                  *ngIf="categoryEdited == i">
+            Validate
+          </button>
+          <button class="btn btn-sm btn-danger"
+                  (click)="categoryEdited = -1"
+                  *ngIf="categoryEdited == i">
+            Close
+          </button>
+          <button class="btn btn-sm btn-warning"
+                  (click)="categoryEdited = i"
+                  *ngIf="categoryEdited != i">
+            <i class="glyphicon glyphicon-pencil"></i>
+            Modify
+          </button>
+          <button class="btn btn-sm btn-danger"
+                  (click)="deleteCategory(category, i)">
+            <i class="glyphicon glyphicon-trash"></i>
+            Delete
+          </button>
+        </td>
+      </tr>
+  </table>
+</div>
+-->
