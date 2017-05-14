@@ -1,11 +1,40 @@
 <ion-header>
-    <ion-navbar>
-      <ion-title>
-          <h1>{{ title }}</h1>
-      </ion-title>
-    </ion-navbar>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ title }}</ion-title>
+  </ion-navbar>
 </ion-header>
 
+
 <ion-content>
-hello
+  <ion-list>
+    <tr>
+
+      <td>
+        <input id="title"
+               type="text"
+               class="form-control"
+               [(ngModel)]="newcategory.name"
+               #ctrl="ngModel" required/>
+      </td>
+
+        <button  class="button button-outline button-positive"
+                (click)="newCategory(newcategory)"
+                routerLink="../categories/categories"
+                routerLinkActive="active"
+                [disabled]="!ctrl.valid">
+          Valider
+        </button>
+        <button class="button button-outline button-assertive"
+                (click)="deleteNewCategory()"
+                routerLink="../categories/categories"
+                routerLinkActive="active">
+          Fermer
+        </button>
+
+    </tr>
+  </ion-list>
+
 </ion-content>

@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ title }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+  <ion-item *ngFor="let note of notes; let i = index;">
+  <div class="list">
+    <div class="panel-heading">
+      <div class="btn-toolbar pull-right">
+        <button class="button button-outline button-energized"
+                (click)="note_edited = i"
+                *ngIf="note_edited != i">
+          <i class="glyphicon glyphicon-pencil"></i>
+          Modify
+        </button>
+        <button class="button button-outline button-assertive"
+                (click)="deleteNote(note)">
+          <i class="glyphicon glyphicon-trash"></i>
+          Delete
+        </button>
+      </div>
+      <span class="h3">
+        {{ note.title }} <small>{{ note.date | date: "dd/MM/yyyy" }}</small>
+      </span>
+      <span class="label label-default"
+            *ngIf="note.category">
+        {{ note.category.name }}
+      </span>
+    </div>
+    <div class="panel-body">
+      {{ note.content }}
+    </div>
+  </div>
+  <div class="pannel form"
+       *ngIf="note_edited == i">
+    <div class="form-group">
+      <label for="title" class="item item-input">Title</label>
+      <input id="title"
+             type="text"
+             class="form-control"
+             required="true"
+             [(ngModel)]="note.title"/>
+    </div>
+    <div class="form-group">
+      <label for="content" class="item item-input">Content</label>
+      <textarea id="content"
+                class="form-control"
+                required="true"
+                [(ngModel)]="note.content">
+      </textarea>
+    </div>
+    <div class="form-group">
+      <select class="form-control" [(ngModel)]="note.category">
+        <option *ngFor="let category of categories"
+                [ngValue]="category"
+                [selected]="note.category.id == category.id">
+        {{ category.name }}
+        </option>
+      </select>
+    </div>
+    <button class="button button-outline button-positive" (click)="updateNote(note, i)">
+      Validate
+    </button>
+    <button class="button button-outline button-assertive" (click)="note_edited = -1">
+      Close
+    </button>
+  </div>
+</ion-item>
+</ion-list>
+</ion-content>

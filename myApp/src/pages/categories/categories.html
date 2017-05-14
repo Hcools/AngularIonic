@@ -1,15 +1,52 @@
 <ion-header>
-    <ion-navbar>
-      <ion-title>
-          <h1>{{ title }}</h1>
-      </ion-title>
-    </ion-navbar>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ title }}</ion-title>
+  </ion-navbar>
 </ion-header>
+
 
 <ion-content>
   <ion-list>
-    <ion-item ion-item *ngFor="let category of categories; let i = index;">
+    <ion-item  *ngFor="let category of categories; let i = index;">
+      <div class="card">
+        <span *ngIf="categoryEdited != i">
+        <div class="item item-text-wrap">
         {{ category.name }}
+      </div>
+      </span>
+      <input id="title"
+             type="text"
+             class="form-control"
+
+             *ngIf="categoryEdited == i"
+             [(ngModel)]="category.name" #ctrl="ngModel" required/>
+
+      <td class="text-right">
+        <button class="button button-outline button-positive"
+                (click)="updateCategory(category, i)"
+                *ngIf="categoryEdited == i">
+          Validate
+        </button>
+        <button class="button button-outline button-assertive"
+                (click)="categoryEdited = -1"
+                *ngIf="categoryEdited == i">
+          Close
+        </button>
+        <button class="button button-outline button-energized"
+                (click)="categoryEdited = i"
+                *ngIf="categoryEdited != i">
+          <i class="glyphicon glyphicon-pencil"></i>
+          Modify
+        </button>
+        <button class="button button-outline button-assertive"
+                (click)="deleteCategory(category, i)">
+          <i class="glyphicon glyphicon-trash"></i>
+          Delete
+        </button>
+      </div>
     </ion-item>
   </ion-list>
 </ion-content>

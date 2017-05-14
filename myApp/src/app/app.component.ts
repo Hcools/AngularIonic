@@ -8,6 +8,7 @@ import { ListPage } from '../pages/list/list';
 import { CategoriesComponent } from '../pages/categories/categories';
 import { NotesComponent } from '../pages/notes/notes';
 import { AddCategoryComponent } from '../pages/addcategory/addcategory';
+import { AddNoteComponent } from '../pages/addnote/addnote';
 
 @Component({
   templateUrl: 'app.html'
@@ -28,7 +29,8 @@ export class MyApp {
       { title: 'List', component: ListPage },
       { title: 'my-categories', component: CategoriesComponent },
       { title: 'notes', component: NotesComponent },
-      { title: 'addcategory', component: AddCategoryComponent }
+      { title: 'addcategory', component: AddCategoryComponent },
+      { title: 'addnote', component: AddNoteComponent }
 
     ];
 
