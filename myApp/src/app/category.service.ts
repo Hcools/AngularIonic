@@ -11,7 +11,7 @@ import { Category } from './category';
 @Injectable()
 export class CategoryService {
 
-  private APIUrl = 'http://localhost/pjtsymfony/symfonyAngular/web/app_dev.php/notepad/api';
+  private APIUrl = 'http://localhost/API/SymfonyAngular2/SymfonyAngular/web/app_dev.php/notepad/api';
 
   constructor(private http: Http) {}
 

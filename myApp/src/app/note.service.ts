@@ -11,7 +11,7 @@ import { Note } from './note';
 
 @Injectable()
 export class NoteService {
-  private notesUrl = 'http://localhost//pjtsymfony/symfonyAngular/web/app_dev.php/notepad/api';
+  private notesUrl = 'http://localhost/API/SymfonyAngular2/SymfonyAngular/web/app_dev.php/notepad/api';
 
   constructor(private http: Http) {}
 

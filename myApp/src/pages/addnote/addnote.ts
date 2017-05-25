@@ -1,12 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NavController} from 'ionic-angular';
 import { NgModule }   from '@angular/core';
+import {ToastController} from 'ionic-angular';
 
 import { Category } from '../../app/category';
 import { Note } from '../../app/note';
 
 import { NoteService } from '../../app/note.service';
 import { CategoryService } from '../../app/category.service';
+import { NotesComponent } from '../notes/notes';
 
 @Component({
   selector: 'addnote',
@@ -27,7 +29,8 @@ export class AddNoteComponent implements OnInit {
 
   constructor(public navCtrl: NavController,
     private note_service: NoteService,
-    private category_service: CategoryService) {
+    private category_service: CategoryService,
+    private toastCtrl: ToastController) {
       this.categories = this.category_service.sendCategories();
       this.getNotes();
       this.getCategories();
@@ -54,6 +57,7 @@ export class AddNoteComponent implements OnInit {
     this.category_service.getCategories().subscribe(
       // function that runs on success
       data => { this.categories = data},
+
       // function that runs on error
       err => console.error(err),
       // function that runs on completion
@@ -64,17 +68,35 @@ export class AddNoteComponent implements OnInit {
 
   newNote(note: Note) {
     this.note_service.newNote(note).subscribe(
-      data => { this.notes.unshift(data) },
+      data => { this.notes.unshift(data);
+        this.navCtrl.setRoot(NotesComponent);
+      this.presentToast("A note has been created");
+    },
       err => console.error(err),
-      () => { this.newnote = null }
+
+    //  () => { this.newnote = null }
     );
   }
+  presentToast(message:string) {
+	  let toast = this.toastCtrl.create({
+		message: message,
+		duration: 3000,
+		position: 'top'
+	  });
+
+	  toast.onDidDismiss(() => {
+		console.log('Dismissed toast');
+	  });
+
+	  toast.present();
+}
 
   initNewNote() {
     this.newnote = new Note();
   }
 
   cancelNewNote() {
-    this.newnote = null;
+      this.navCtrl.setRoot(NotesComponent)
+
   }
 }

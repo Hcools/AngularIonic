@@ -8,8 +8,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { LocationStrategy, HashLocationStrategy} from '@angular/common';
 import {ModuleWithProviders} from '@angular/core';
 import { NavController} from 'ionic-angular';
+import {ToastController} from 'ionic-angular';
 
-import { CategoriesComponent } from '../../app/categories.component';
+import { CategoriesComponent } from '../categories/categories';
 
 import { NoteService } from '../../app/note.service';
 import { CategoryService } from '../../app/category.service';
@@ -27,7 +28,7 @@ export class AddCategoryComponent implements OnInit {
   categories:Category[];
   newcategory: Category = null;
 
-  constructor(public navCtrl: NavController, private category_service: CategoryService) {}
+  constructor(public navCtrl: NavController, private category_service: CategoryService, private toastCtrl: ToastController) {}
 
   ngOnInit(): void {
     this.newcategory = new Category();
@@ -55,14 +56,34 @@ export class AddCategoryComponent implements OnInit {
   newCategory(category: Category) {
     console.log("ggggggg");
     this.category_service.newCategory(category).subscribe(
-      data => { this.categories.unshift(data) },
+      data => { this.categories.unshift(data),
+        this.presentToast("A category has been created");
+        this.navCtrl.setRoot(CategoriesComponent); },
+
       err => console.error(err),
       //() => { this.newcategory = null }
     );
+
+
   }
+  presentToast(message:string) {
+	  let toast = this.toastCtrl.create({
+		message: message,
+		duration: 3000,
+		position: 'top'
+	  });
+
+	  toast.onDidDismiss(() => {
+		console.log('Dismissed toast');
+	  });
+
+	  toast.present();
+}
 
   deleteNewCategory() {
-    this.newcategory = null;
+    //this.newcategory = null;
+    this.navCtrl.setRoot(CategoriesComponent);
+
   }
 
 }

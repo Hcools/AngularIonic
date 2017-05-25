@@ -9,45 +9,43 @@
 
 
 <ion-content>
-  <div class="pannel form">
-    <div class="form-group">
-      <label for="title" class="control-label">Title</label>
+  <ion-card>
+    <ion-list>
+      <ion-item>
+      <label for="title" class="control-label">Title</label>     <ion-row>
       <input id="title"
              type="text"
              class="form-control"
              required="true"
-             [(ngModel)]="newnote.title"/>
-    </div>
-    <div class="form-group">
-      <label for="content" class="control-label">Content</label>
+             [(ngModel)]="newnote.title"/>     </ion-row>
+           </ion-item>
+           <ion-item>
+      <label for="content" class="control-label">Content</label>     <ion-row>
       <textarea id="content"
                 class="form-control"
 
                 [(ngModel)]="newnote.content" #ctrl="ngModel" required>
-      </textarea>
-
-    </div>
-    <div class="form-group">
+      </textarea>     </ion-row>
+</ion-item>
+  <ion-item>
       <select class="form-control" [(ngModel)]="newnote.category">
         <option *ngFor="let category of categories"
               [ngValue]="category">
         {{ category.name }}
         </option>
       </select>
-    </div>
-
-    <button class="button button-outline button-positive"
+    </ion-item>
+<ion-item>
+    <button ion-button full color="default" class="button button-outline button-positive"
       (click)="newNote(newnote)"
-      routerLink="../notes/notes"
-      routerLinkActive="active"
       [disabled]="!ctrl.valid">
       Validate
     </button>
-    <button class="button button-outline button-assertive"
-      (click)="cancelNewNote()"routerLink="../notes/notes"
-       routerLinkActive="active">
+    <button ion-button full color="danger" class="button button-outline button-assertive"
+      (click)="cancelNewNote()">
       Close
     </button>
-
-  </div>
+</ion-item>
+</ion-list>
+</ion-card>
 </ion-content>
